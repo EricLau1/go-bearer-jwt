@@ -91,8 +91,10 @@ func isAuthByBearerToken(handler func(http.ResponseWriter, *http.Request)) http.
           handler(w, r)
         }
       }
+    } else {
+      w.WriteHeader(http.StatusUnauthorized)
+      fmt.Fprintf(w, "Unauthorized")
     }
-    fmt.Fprintf(w, "Unauthorized")
   })
 }
 
